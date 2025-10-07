@@ -1,29 +1,39 @@
-<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-  <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
-  <id>me.dirtydan16.BetterJump</id>
+    <id>me.dirtydan16.BetterJump</id>
 
-  <!-- Public plugin name should be written in Title Case.
-       Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
-  <name>BetterJump</name>
+    <name>BetterJump</name>
 
-  <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
-  <vendor url="https://www.yourcompany.com">YourCompany</vendor>
+    <vendor email="stav.gr8@gmail.com">Stav Gordeev</vendor>
 
-  <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
-       Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
-  <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
-  ]]></description>
+    <description>
+        An Intellij Plugin for better navigation in files
+    </description>
 
-  <!-- Product and plugin compatibility requirements.
-       Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
-  <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.platform</depends>
 
-  <!-- Extension points defined by the plugin.
-       Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
-  <extensions defaultExtensionNs="com.intellij">
+    <extensions defaultExtensionNs="com.intellij">
 
-  </extensions>
+    </extensions>
+
+    <actions>
+        <group id="CommaActionsGroup">
+            <action
+                id="GoToNextComma"
+                class="me.dirtydan16.betterjump.actions.GoToNextComma"
+                text="Go To Next Comma"
+                description="Moves the caret to the next comma.">
+                <keyboard-shortcut keymap="$default" first-keystroke="ctrl COMMA" />
+            </action>
+
+            <action
+                id="GoToPrevComma"
+                class="me.dirtydan16.betterjump.actions.GoToPrevComma"
+                text="Go To Previous Comma"
+                description="Moves the caret to the previous comma.">
+                <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift COMMA" />
+            </action>
+
+        </group>
+    </actions>
+
 </idea-plugin>

@@ -1,11 +1,11 @@
 plugins {
   id("java")
   id("org.jetbrains.kotlin.jvm") version "2.1.0"
-  id("org.jetbrains.intellij.platform") version "2.5.0"
+  id("org.jetbrains.intellij.platform") version "2.9.0"
 }
 
 group = "me.dirtydan16"
-version = "1.0-SNAPSHOT"
+version = "1.1.0 -SNAPSHOT"
 
 repositories {
   mavenCentral()
@@ -25,6 +25,7 @@ dependencies {
     // bundledPlugin("com.intellij.java")
   }
 }
+
 
 intellijPlatform {
   pluginConfiguration {
