@@ -19,18 +19,19 @@
         <group id="CommaActionsGroup">
             <action
                 id="GoToNextComma"
-                class="me.dirtydan16.betterjump.actions.GoToNextComma"
+                class="me.dirtydan16.betterjump.actions.comma_navigation.GoToNextComma"
                 text="Go To Next Comma"
                 description="Moves the caret to the next comma.">
-                <keyboard-shortcut keymap="$default" first-keystroke="ctrl COMMA" />
+                    <keyboard-shortcut keymap="$default" first-keystroke="ctrl COMMA" />
             </action>
+
 
             <action
                 id="GoToPrevComma"
-                class="me.dirtydan16.betterjump.actions.GoToPrevComma"
+                class="me.dirtydan16.betterjump.actions.comma_navigation.GoToPrevComma"
                 text="Go To Previous Comma"
                 description="Moves the caret to the previous comma.">
-                <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift COMMA" />
+                    <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift COMMA" />
             </action>
 
         </group>
