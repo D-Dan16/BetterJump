@@ -1,16 +1,12 @@
 package me.dirtydan16.betterjump.actions.comma_navigation
 
-import com.intellij.ide.DataManager
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
-import com.intellij.openapi.actionSystem.DataContext
-import com.intellij.openapi.actionSystem.IdeActions
 import com.intellij.openapi.editor.Caret
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.ScrollType
-import com.intellij.openapi.editor.actionSystem.EditorActionHandler
-import com.intellij.openapi.editor.actionSystem.EditorActionManager
+import me.dirtydan16.betterjump.utils.additions.findIndicesOfMethodCall
 
 open class GoToNextComma : AnAction() {
     override fun actionPerformed(event: AnActionEvent) {
@@ -70,6 +66,59 @@ open class GoToPrevComma : AnAction() {
         }
     }
 }
+
+
+class GoToNextCommaWithSelection : GoToNextComma() {
+    override fun actionPerformed(event: AnActionEvent) = performCommaWithSelectionAction(event, true,{ super.actionPerformed(event) })
+}
+
+class GoToPrevCommaWithSelection : GoToPrevComma() {
+    override fun actionPerformed(event: AnActionEvent) = performCommaWithSelectionAction(event, false,{ super.actionPerformed(event) })
+}
+
+//region Helper Methods for Comma With Selection Actions
+private fun performCommaWithSelectionAction(
+    event: AnActionEvent,
+    movesForwards: Boolean,
+    goToComma: () -> Unit
+) {
+    val editor: Editor = event.getData(CommonDataKeys.EDITOR) ?: return
+    val carets = editor.caretModel.allCarets
+    val text = editor.document.charsSequence
+
+    if (text.count { it == ',' } < 2)
+        return
+
+    for (caret in carets) {
+        goToComma()
+
+        caret.removeSelection()
+
+        val leftComma = (caret.offset downTo 0).firstOrNull { text[it] == ',' } ?: 0
+        val rightComma = (caret.offset+1..text.lastIndex).firstOrNull { text[it] == ',' } ?: text.lastIndex
+
+        val (openerParenthesisIndex, closerParenthesisIndex) = findIndicesOfMethodCall(text, caret.offset)
+
+        val startOfContent = (leftComma+1..rightComma).firstOrNull {
+            text[it].isWhitespace().not()
+        } ?: leftComma
+
+
+        val stopCondition: (Int) -> Boolean = if (openerParenthesisIndex != null) {
+            index -> index == closerParenthesisIndex
+        } else {
+            index -> text[index].isWhitespace().not()
+        }
+
+        val endOfContent = (startOfContent..rightComma - 1).firstOrNull {
+            stopCondition(it)
+        } ?: rightComma
+
+        caret.setSelection(startOfContent, endOfContent)
+    }
+}
+
+//endregion
 
 
 /**

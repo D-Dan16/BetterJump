@@ -22,18 +22,29 @@
                 class="me.dirtydan16.betterjump.actions.comma_navigation.GoToNextComma"
                 text="Go To Next Comma"
                 description="Moves the caret to the next comma.">
-                    <keyboard-shortcut keymap="$default" first-keystroke="ctrl COMMA" />
+                <keyboard-shortcut keymap="$default" first-keystroke="ctrl COMMA" />
             </action>
-
-
             <action
                 id="GoToPrevComma"
                 class="me.dirtydan16.betterjump.actions.comma_navigation.GoToPrevComma"
                 text="Go To Previous Comma"
                 description="Moves the caret to the previous comma.">
-                    <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift COMMA" />
+                <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift COMMA" />
             </action>
-
+            <action
+                id="GoToNextCommaWithSelection"
+                class="me.dirtydan16.betterjump.actions.comma_navigation.GoToNextCommaWithSelection"
+                text="Select Content To Next Comma"
+                description="Moves caret to the right of the right comma and selects the text that is inside 2 commas. upon multiple uses, switches to the next element instead.">
+                <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt COMMA" />
+            </action>
+            <action
+                id="GoToPrevCommaWithSelection"
+                class="me.dirtydan16.betterjump.actions.comma_navigation.GoToPrevCommaWithSelection"
+                text="Select Content To Previous Comma"
+                description="Moves caret to the left of the left comma and selects the text that is inside 2 commas. upon multiple uses, switches to the previous element instead.">
+                <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt shift COMMA" />
+            </action>
         </group>
     </actions>
 
