@@ -77,6 +77,7 @@ class GoToPrevCommaWithSelection : GoToPrevComma() {
 }
 
 //region Helper Methods for Comma With Selection Actions
+//TODO: This is not at a good state with detection of which text it should actually select - currently it tries to select all/most text [non-whitespace] between 2 commas, when the desired outcome should be to select the text that is surrounded by parenthesis of a method call (since this action should typically be used for selecting an argument of a method call)
 private fun performCommaWithSelectionAction(
     event: AnActionEvent,
     movesForwards: Boolean,

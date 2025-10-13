@@ -12,10 +12,46 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-
+        <applicationConfigurable
+                id="me.dirtydan16.betterjump.settings"
+                displayName="BetterJump"
+                instance="me.dirtydan16.betterjump.settings.BetterJumpConfigurable"
+                groupId="tools"/>
     </extensions>
 
     <actions>
+        <group id="NavigationHorizontally">
+            <action id="JumpHorizontal" class="me.dirtydan16.betterjump.actions.JumpHorizontal" text="Jump Horizontally"
+                    description="Jump each caret by a specified character amount that has been preset via the Set And Jump Horizontally action.">
+                <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt X"/>
+            </action>
+            <action id="SetAndJumpHorizontal"
+                    class="me.dirtydan16.betterjump.actions.SetAndJumpHorizontal" text="Set Horizontal Jump Amount"
+                    description="Jump each caret by a specified character amount in the menu dialog.">
+                <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl G"/>
+                <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl X"/>
+            </action>
+            <action id="InvertJumpHorizontalDirection"
+                    class="me.dirtydan16.betterjump.actions.InvertJumpHorizontalDirection"
+                    text="Invert Direction of Horizontal Jump"
+                    description="Invert the direction of where you jump horizontally when you use the action Jump Horizontally (for Char jump only)">
+                <keyboard-shortcut keymap="$default" first-keystroke="shift alt X"/>
+            </action>
+            <action
+                id="WordJumpToRight"
+                class="me.dirtydan16.betterjump.actions.JumpToRight"
+                text="Jump To Right"
+                description="Jump the caret to the start of the word that is ahead of the caret by an X amount.">
+                <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift alt RIGHT"/>
+            </action>
+            <action
+                    id="WordJumpToLeft"
+                    class="me.dirtydan16.betterjump.actions.JumpToLeft"
+                    text="Jump To Right"
+                    description="Jump the caret to the start of the word that is behind of the caret by an X amount.">
+                <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift alt LEFT"/>
+            </action>
+        </group>
         <group id="CommaActionsGroup">
             <action
                 id="GoToNextComma"
