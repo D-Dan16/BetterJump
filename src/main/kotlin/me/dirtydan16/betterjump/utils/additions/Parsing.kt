@@ -18,6 +18,10 @@ fun findIndicesOfBrackets(text: CharSequence, caretPosition: Int): Pair<Int?, In
     return findIndicesOfSurroundingBlock(text, caretPosition, '[', ']')
 }
 
+/**
+ * Identifies the indices of the opening and closing curly braces.
+ * the index of the opener is the index of '{' + 1, and the closer the index of the '}' - 1
+ */
 fun findIndicesOfCodeBlock(text: CharSequence, caretPosition: Int): Pair<Int?, Int?> {
     return findIndicesOfSurroundingBlock(text, caretPosition, '{', '}')
 }
@@ -49,8 +53,8 @@ private fun findIndicesOfSurroundingBlock(
         }
     }
 
-    // Step 2: find the pair that surrounds the caret. We take the last pair since it is the most inner pair.
-    val match = pairs.lastOrNull { (open, close) ->
+    // Step 2: find the pair that surrounds the caret. We take the first pair since it is the most inner pair.
+    val match = pairs.firstOrNull { (open, close) ->
         caretPosition in (open + 1)..(close - 1)
     }
 

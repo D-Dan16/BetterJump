@@ -1,4 +1,4 @@
-package me.dirtydan16.betterjump.actions.comma_navigation
+package me.dirtydan16.betterjump.actions.navigation
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
@@ -14,15 +14,15 @@ open class GoToNextComma : AnAction() {
         val carets = editor.caretModel.allCarets
         val text = editor.document.charsSequence
 
-        carets.forEach { char ->
-            val nextCommaIndex = text.indexOf(',', char.offset)
+        carets.forEach { caret ->
+            val nextCommaIndex = text.indexOf(',', caret.offset)
 
             // If there is no comma to jump to, just loop to the very start of the file
             if (nextCommaIndex == -1) {
-                char.moveToOffset(text.indexOfFirst { it.isWhitespace().not() })
+                caret.moveToOffset(text.indexOfFirst { it.isWhitespace().not() })
                 editor.scrollingModel.scrollToCaret(ScrollType.MAKE_VISIBLE)
             } else {
-                goToComma(nextCommaIndex, editor, char)
+                goToComma(nextCommaIndex, editor, caret)
             }
         }
     }
@@ -131,7 +131,6 @@ fun goToComma(commaIndex: Int, editor: Editor, caret: Caret) {
 
     // increment by 1 to move after the comma (so we will not get stuck on the same comma)
     var commaIndex = commaIndex + 1
-
 
     val text = editor.document.charsSequence
 

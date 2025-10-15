@@ -12,6 +12,10 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
+        <statusBarWidgetFactory implementation="me.dirtydan16.betterjump.actions.navigation.CaretOffsetWidgetFactory"
+                                id="CaretOffsetWidget"/>
+
+
         <applicationConfigurable
                 id="me.dirtydan16.betterjump.settings"
                 displayName="BetterJump"
@@ -21,32 +25,32 @@
 
     <actions>
         <group id="NavigationHorizontally">
-            <action id="JumpHorizontal" class="me.dirtydan16.betterjump.actions.JumpHorizontal" text="Jump Horizontally"
+            <action id="JumpHorizontal" class="me.dirtydan16.betterjump.actions.navigation.JumpHorizontal" text="Jump Horizontally"
                     description="Jump each caret by a specified character amount that has been preset via the Set And Jump Horizontally action.">
                 <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt X"/>
             </action>
             <action id="SetAndJumpHorizontal"
-                    class="me.dirtydan16.betterjump.actions.SetAndJumpHorizontal" text="Set Horizontal Jump Amount"
+                    class="me.dirtydan16.betterjump.actions.navigation.SetAndJumpHorizontal" text="Set Horizontal Jump Amount"
                     description="Jump each caret by a specified character amount in the menu dialog.">
                 <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl G"/>
                 <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl X"/>
             </action>
             <action id="InvertJumpHorizontalDirection"
-                    class="me.dirtydan16.betterjump.actions.InvertJumpHorizontalDirection"
+                    class="me.dirtydan16.betterjump.actions.navigation.InvertJumpHorizontalDirection"
                     text="Invert Direction of Horizontal Jump"
                     description="Invert the direction of where you jump horizontally when you use the action Jump Horizontally (for Char jump only)">
                 <keyboard-shortcut keymap="$default" first-keystroke="shift alt X"/>
             </action>
             <action
                 id="WordJumpToRight"
-                class="me.dirtydan16.betterjump.actions.JumpToRight"
+                class="me.dirtydan16.betterjump.actions.navigation.JumpToRight"
                 text="Jump To Right"
                 description="Jump the caret to the start of the word that is ahead of the caret by an X amount.">
                 <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift alt RIGHT"/>
             </action>
             <action
                     id="WordJumpToLeft"
-                    class="me.dirtydan16.betterjump.actions.JumpToLeft"
+                    class="me.dirtydan16.betterjump.actions.navigation.JumpToLeft"
                     text="Jump To Right"
                     description="Jump the caret to the start of the word that is behind of the caret by an X amount.">
                 <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift alt LEFT"/>
@@ -55,31 +59,44 @@
         <group id="CommaActionsGroup">
             <action
                 id="GoToNextComma"
-                class="me.dirtydan16.betterjump.actions.comma_navigation.GoToNextComma"
+                class="me.dirtydan16.betterjump.actions.navigation.GoToNextComma"
                 text="Go To Next Comma"
                 description="Moves the caret to the next comma.">
                 <keyboard-shortcut keymap="$default" first-keystroke="ctrl COMMA" />
             </action>
             <action
                 id="GoToPrevComma"
-                class="me.dirtydan16.betterjump.actions.comma_navigation.GoToPrevComma"
+                class="me.dirtydan16.betterjump.actions.navigation.GoToPrevComma"
                 text="Go To Previous Comma"
                 description="Moves the caret to the previous comma.">
                 <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift COMMA" />
             </action>
             <action
                 id="GoToNextCommaWithSelection"
-                class="me.dirtydan16.betterjump.actions.comma_navigation.GoToNextCommaWithSelection"
+                class="me.dirtydan16.betterjump.actions.navigation.GoToNextCommaWithSelection"
                 text="Select Content To Next Comma"
                 description="Moves caret to the right of the right comma and selects the text that is inside 2 commas. upon multiple uses, switches to the next element instead.">
                 <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt COMMA" />
             </action>
             <action
                 id="GoToPrevCommaWithSelection"
-                class="me.dirtydan16.betterjump.actions.comma_navigation.GoToPrevCommaWithSelection"
+                class="me.dirtydan16.betterjump.actions.navigation.GoToPrevCommaWithSelection"
                 text="Select Content To Previous Comma"
                 description="Moves caret to the left of the left comma and selects the text that is inside 2 commas. upon multiple uses, switches to the previous element instead.">
                 <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt shift COMMA" />
+            </action>
+        </group>
+        <group id="GoToBlock">
+            <action id="GoToNextBlock" class="me.dirtydan16.betterjump.actions.navigation.GoToNextBlock"
+                    text="Go to Next Block"
+                    description="Moves caret to the first non-whitespace character of the next block of code [ {} ]">
+                <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt CLOSE_BRACKET"/>
+            </action>
+            <action id="GoToPreviousBlock" class="me.dirtydan16.betterjump.actions.navigation.GoToPreviousBlock"
+                    text="Go to Previous Block"
+                    description="Moves caret to the first non-whitespace character of the previous block of code [ {} ]">
+                <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt OPEN_BRACKET"/>
+            </action>
             </action>
         </group>
     </actions>
