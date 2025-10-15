@@ -20,11 +20,21 @@ fun findIndicesOfBrackets(text: CharSequence, caretPosition: Int): Pair<Int?, In
 
 /**
  * Identifies the indices of the opening and closing curly braces.
- * the index of the opener is the index of '{' + 1, and the closer the index of the '}' - 1
+ *
+ * @return a pair of indexes - the index of the opener is the index of '{', and the closer the index of the '}'. returns Null if there is no code block surrounding the given position
  */
 fun findIndicesOfCodeBlock(text: CharSequence, caretPosition: Int): Pair<Int?, Int?> {
     return findIndicesOfSurroundingBlock(text, caretPosition, '{', '}')
 }
+
+fun findRangeOfCodeBlock(text: CharSequence, caretPosition: Int): IntRange? {
+    return findIndicesOfSurroundingBlock(text, caretPosition, '{', '}').run {
+        val (start, end) = this
+        if (start != null && end != null) start+1..end-1 else null
+    }
+}
+
+
 
 private fun findIndicesOfSurroundingBlock(
     text: CharSequence,
@@ -37,14 +47,15 @@ private fun findIndicesOfSurroundingBlock(
 
     // Step 1: match all openers, with closers
 
-    var shouldIgnoreChar = text[0] == '"'
+    val insideStringChars = listOf('"', '\'')
+    var shouldIgnoreChar = text[0] in insideStringChars
     text.forEachIndexed { index, ch ->
         if (shouldIgnoreChar) {
-            if (ch == '"')
+            if (ch in insideStringChars)
                 shouldIgnoreChar = false
         } else {
             when (ch) {
-                '"' -> shouldIgnoreChar = true
+                in insideStringChars -> shouldIgnoreChar = true
                 openerChar -> stack.addLast(index)
                 closerChar -> if (stack.isNotEmpty()) {
                     pairs += stack.removeLast() to index

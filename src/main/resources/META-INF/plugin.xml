@@ -86,17 +86,43 @@
                 <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt shift COMMA" />
             </action>
         </group>
+        <group id="JumpToMethodCall">
+            <action id="JumpToNextMethodCall" class="me.dirtydan16.betterjump.actions.navigation.JumpToNextMethodCall"
+                    text="Jump to Next Method Call"
+                    description="Jump the caret to the start of the contents of the next method call">
+                <keyboard-shortcut keymap="$default" first-keystroke="ctrl M"/>
+            </action>
+            <action id="JumpToPrevMethodCall" class="me.dirtydan16.betterjump.actions.navigation.JumpToPrevMethodCall"
+                    text="Jump to Previous Method Call"
+                    description="Jump the caret to the start of the contents of the prev method call">
+                <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl M"/>
+            </action>
+        </group>
         <group id="GoToBlock">
             <action id="GoToNextBlock" class="me.dirtydan16.betterjump.actions.navigation.GoToNextBlock"
                     text="Go to Next Block"
-                    description="Moves caret to the first non-whitespace character of the next block of code [ {} ]">
+                    description="Moves caret to the first non-whitespace character of the next block of code [ {} ], if there is one.">
                 <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt CLOSE_BRACKET"/>
             </action>
             <action id="GoToPreviousBlock" class="me.dirtydan16.betterjump.actions.navigation.GoToPreviousBlock"
                     text="Go to Previous Block"
-                    description="Moves caret to the first non-whitespace character of the previous block of code [ {} ]">
+                    description="Moves caret to the first non-whitespace character of the previous block of code [ {} ], if there is one.">
                 <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt OPEN_BRACKET"/>
             </action>
+            <action id="GoToInnerBlock" class="me.dirtydan16.betterjump.actions.navigation.GoToInnerBlock"
+                    text="Go to Inner Block"
+                    description="Moves caret to the start of the content of an inner code block if possible [ {} ]">
+                <keyboard-shortcut keymap="$default" first-keystroke="shift alt CLOSE_BRACKET"/>
+            </action>
+            <action id="GoToOuterBlock" class="me.dirtydan16.betterjump.actions.navigation.GoToOuterBlock"
+                    text="Go to Outer Block"
+                    description="Moves caret to the start of the content of an outer code block if possible [ {} ]">
+                <keyboard-shortcut keymap="$default" first-keystroke="shift alt OPEN_BRACKET"/>
+            </action>
+            <action id="SelectBlockCaretIsIn" class="me.dirtydan16.betterjump.actions.navigation.SelectBlockCaretIsIn"
+                    text="Select Code Block"
+                    description="Select the block of code the caret is in. This refers to what is inside curly braces, and curly braces only.">
+                <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt W"/>
             </action>
         </group>
     </actions>
