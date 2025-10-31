@@ -7,6 +7,8 @@ import com.intellij.openapi.editor.Caret
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.ScrollType
 import me.dirtydan16.betterjump.utils.additions.findIndicesOfMethodCall
+import me.dirtydan16.betterjump.utils.extensions.indexOfOrNull
+import me.dirtydan16.betterjump.utils.extensions.lastIndexOfOrNull
 
 open class GoToNextComma : AnAction() {
     override fun actionPerformed(event: AnActionEvent) {
@@ -36,20 +38,17 @@ open class GoToPrevComma : AnAction() {
 
         carets.forEach { caret ->
             // Find the comma directly before the caret. If there is none, loop backwards to the last comma
-            val curCommaIndex = (caret.offset - 1 downTo 0).firstOrNull { i -> text[i] == ',' } ?: -1
-            if (curCommaIndex == -1) {
+            val curCommaIndex = text.lastIndexOfOrNull(',',caret.offset-1) ?: run {
                 val lastCommaIndex = text.indexOfLast { it == ',' }
                 val firstNonWhitespacePos = (lastCommaIndex..text.lastIndex).first { text[it].isWhitespace().not() }
                 caret.moveToOffset(firstNonWhitespacePos)
                 editor.scrollingModel.scrollToCaret(ScrollType.MAKE_VISIBLE)
-                return
+                return@forEach
             }
 
             // From that position, find the *previous* comma before it
-            val prevCommaIndex = (curCommaIndex - 1 downTo 0).firstOrNull { i -> text[i] == ',' } ?: -1
-
             // If there is no comma to jump to, jump to the first non-white-space character from the start of the file
-            if (prevCommaIndex == -1) {
+            val prevCommaIndex = text.lastIndexOfOrNull(',',curCommaIndex-1) ?: run {
                 //edge case: if the very first character is not a white-space, just move the cursor to the start.
                 if (text[0].isWhitespace().not()) {
                     caret.removeSelection()
@@ -59,28 +58,27 @@ open class GoToPrevComma : AnAction() {
                 } else {
                     goToComma(0, editor, caret)
                 }
-
-            } else {
-                goToComma(prevCommaIndex, editor, caret)
+                return@forEach
             }
+
+            goToComma(prevCommaIndex, editor, caret)
         }
     }
 }
 
 
 class GoToNextCommaWithSelection : GoToNextComma() {
-    override fun actionPerformed(event: AnActionEvent) = performCommaWithSelectionAction(event, true,{ super.actionPerformed(event) })
+    override fun actionPerformed(event: AnActionEvent) = performCommaWithSelectionAction(event, { super.actionPerformed(event) })
 }
 
 class GoToPrevCommaWithSelection : GoToPrevComma() {
-    override fun actionPerformed(event: AnActionEvent) = performCommaWithSelectionAction(event, false,{ super.actionPerformed(event) })
+    override fun actionPerformed(event: AnActionEvent) = performCommaWithSelectionAction(event, { super.actionPerformed(event) })
 }
 
 //region Helper Methods for Comma With Selection Actions
 //TODO: This is not at a good state with detection of which text it should actually select - currently it tries to select all/most text [non-whitespace] between 2 commas, when the desired outcome should be to select the text that is surrounded by parenthesis of a method call (since this action should typically be used for selecting an argument of a method call)
 private fun performCommaWithSelectionAction(
     event: AnActionEvent,
-    movesForwards: Boolean,
     goToComma: () -> Unit
 ) {
     val editor: Editor = event.getData(CommonDataKeys.EDITOR) ?: return
@@ -95,8 +93,8 @@ private fun performCommaWithSelectionAction(
 
         caret.removeSelection()
 
-        val leftComma = (caret.offset downTo 0).firstOrNull { text[it] == ',' } ?: 0
-        val rightComma = (caret.offset+1..text.lastIndex).firstOrNull { text[it] == ',' } ?: text.lastIndex
+        val leftComma = text.lastIndexOfOrNull(',',caret.offset) ?: 0
+        val rightComma = text.indexOfOrNull(',',caret.offset) ?: text.lastIndex
 
         val (openerParenthesisIndex, closerParenthesisIndex) = findIndicesOfMethodCall(text, caret.offset)
 

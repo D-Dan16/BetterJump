@@ -2,6 +2,9 @@ package me.dirtydan16.betterjump.utils.extensions
 
 import com.intellij.openapi.util.NlsSafe
 
+/**
+ * A [lastIndexOf] method, but instead of -1, returns null
+ */
 fun @NlsSafe CharSequence.lastIndexOfOrNull(targetChar: Char, startSearchIndex: Int): Int? {
     val index = lastIndexOf(targetChar,startSearchIndex)
     if (index == -1) {

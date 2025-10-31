@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
   id("java")
   id("org.jetbrains.kotlin.jvm") version "2.1.0"
@@ -5,7 +7,7 @@ plugins {
 }
 
 group = "me.dirtydan16"
-version = "1.5.0-SNAPSHOT"
+version = "1.5.1-SNAPSHOT"
 
 repositories {
   mavenCentral()
@@ -45,7 +47,11 @@ tasks {
     sourceCompatibility = "21"
     targetCompatibility = "21"
   }
-  withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+  withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "21"
   }
+}
+val compileKotlin: KotlinCompile by tasks
+compileKotlin.compilerOptions {
+  freeCompilerArgs.set(listOf("-XXLanguage:+BreakContinueInInlineLambdas"))
 }
