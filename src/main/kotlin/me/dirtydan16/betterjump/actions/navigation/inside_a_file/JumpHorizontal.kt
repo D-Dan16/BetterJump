@@ -1,4 +1,4 @@
-package me.dirtydan16.betterjump.actions.navigation
+package me.dirtydan16.betterjump.actions.navigation.inside_a_file
 
 import com.intellij.ide.DataManager
 import com.intellij.openapi.actionSystem.AnAction

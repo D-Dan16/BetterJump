@@ -12,7 +12,7 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <statusBarWidgetFactory implementation="me.dirtydan16.betterjump.actions.navigation.CaretOffsetWidgetFactory"
+        <statusBarWidgetFactory implementation="me.dirtydan16.betterjump.actions.navigation.inside_a_file.CaretOffsetWidgetFactory"
                                 id="CaretOffsetWidget"/>
 
 
@@ -25,32 +25,32 @@
 
     <actions>
         <group id="NavigationHorizontally">
-            <action id="JumpHorizontal" class="me.dirtydan16.betterjump.actions.navigation.JumpHorizontal" text="Jump Horizontally"
+            <action id="JumpHorizontal" class="me.dirtydan16.betterjump.actions.navigation.inside_a_file.JumpHorizontal" text="Jump Horizontally"
                     description="Jump each caret by a specified character amount that has been preset via the Set And Jump Horizontally action.">
                 <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt X"/>
             </action>
             <action id="SetAndJumpHorizontal"
-                    class="me.dirtydan16.betterjump.actions.navigation.SetAndJumpHorizontal" text="Set Horizontal Jump Amount"
+                    class="me.dirtydan16.betterjump.actions.navigation.inside_a_file.SetAndJumpHorizontal" text="Set Horizontal Jump Amount"
                     description="Jump each caret by a specified character amount in the menu dialog.">
                 <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl G"/>
                 <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl X"/>
             </action>
             <action id="InvertJumpHorizontalDirection"
-                    class="me.dirtydan16.betterjump.actions.navigation.InvertJumpHorizontalDirection"
+                    class="me.dirtydan16.betterjump.actions.navigation.inside_a_file.InvertJumpHorizontalDirection"
                     text="Invert Direction of Horizontal Jump"
                     description="Invert the direction of where you jump horizontally when you use the action Jump Horizontally (for Char jump only)">
                 <keyboard-shortcut keymap="$default" first-keystroke="shift alt X"/>
             </action>
             <action
                 id="WordJumpToRight"
-                class="me.dirtydan16.betterjump.actions.navigation.JumpToRight"
+                class="me.dirtydan16.betterjump.actions.navigation.inside_a_file.JumpToRight"
                 text="Jump To Right"
                 description="Jump the caret to the start of the word that is ahead of the caret by an X amount.">
                 <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift alt RIGHT"/>
             </action>
             <action
                     id="WordJumpToLeft"
-                    class="me.dirtydan16.betterjump.actions.navigation.JumpToLeft"
+                    class="me.dirtydan16.betterjump.actions.navigation.inside_a_file.JumpToLeft"
                     text="Jump To Right"
                     description="Jump the caret to the start of the word that is behind of the caret by an X amount.">
                 <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift alt LEFT"/>
@@ -59,67 +59,67 @@
         <group id="CommaActionsGroup">
             <action
                 id="GoToNextComma"
-                class="me.dirtydan16.betterjump.actions.navigation.GoToNextComma"
+                class="me.dirtydan16.betterjump.actions.navigation.inside_a_file.comma.GoToNextComma"
                 text="Go To Next Comma"
                 description="Moves the caret to the next comma.">
                 <keyboard-shortcut keymap="$default" first-keystroke="ctrl COMMA" />
             </action>
             <action
                 id="GoToPrevComma"
-                class="me.dirtydan16.betterjump.actions.navigation.GoToPrevComma"
+                class="me.dirtydan16.betterjump.actions.navigation.inside_a_file.comma.GoToPrevComma"
                 text="Go To Previous Comma"
                 description="Moves the caret to the previous comma.">
                 <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift COMMA" />
             </action>
             <action
                 id="GoToNextCommaWithSelection"
-                class="me.dirtydan16.betterjump.actions.navigation.GoToNextCommaWithSelection"
+                class="me.dirtydan16.betterjump.actions.navigation.inside_a_file.comma.GoToNextCommaWithSelection"
                 text="Select Content To Next Comma"
                 description="Moves caret to the right of the right comma and selects the text that is inside 2 commas. upon multiple uses, switches to the next element instead.">
                 <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt COMMA" />
             </action>
             <action
                 id="GoToPrevCommaWithSelection"
-                class="me.dirtydan16.betterjump.actions.navigation.GoToPrevCommaWithSelection"
+                class="me.dirtydan16.betterjump.actions.navigation.inside_a_file.comma.GoToPrevCommaWithSelection"
                 text="Select Content To Previous Comma"
                 description="Moves caret to the left of the left comma and selects the text that is inside 2 commas. upon multiple uses, switches to the previous element instead.">
                 <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt shift COMMA" />
             </action>
         </group>
         <group id="JumpToMethodCall">
-            <action id="JumpToNextMethodCall" class="me.dirtydan16.betterjump.actions.navigation.JumpToNextMethodCall"
+            <action id="JumpToNextMethodCall" class="me.dirtydan16.betterjump.actions.navigation.inside_a_file.JumpToNextMethodCall"
                     text="Jump to Next Method Call"
                     description="Jump the caret to the start of the contents of the next method call">
                 <keyboard-shortcut keymap="$default" first-keystroke="ctrl M"/>
             </action>
-            <action id="JumpToPrevMethodCall" class="me.dirtydan16.betterjump.actions.navigation.JumpToPrevMethodCall"
+            <action id="JumpToPrevMethodCall" class="me.dirtydan16.betterjump.actions.navigation.inside_a_file.JumpToPrevMethodCall"
                     text="Jump to Previous Method Call"
                     description="Jump the caret to the start of the contents of the prev method call">
                 <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl M"/>
             </action>
         </group>
         <group id="GoToBlock">
-            <action id="GoToNextBlock" class="me.dirtydan16.betterjump.actions.navigation.GoToNextBlock"
+            <action id="GoToNextBlock" class="me.dirtydan16.betterjump.actions.navigation.inside_a_file.GoToNextBlock"
                     text="Go to Next Block"
                     description="Moves caret to the first non-whitespace character of the next block of code [ {} ], if there is one.">
                 <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt CLOSE_BRACKET"/>
             </action>
-            <action id="GoToPreviousBlock" class="me.dirtydan16.betterjump.actions.navigation.GoToPreviousBlock"
+            <action id="GoToPreviousBlock" class="me.dirtydan16.betterjump.actions.navigation.inside_a_file.GoToPreviousBlock"
                     text="Go to Previous Block"
                     description="Moves caret to the first non-whitespace character of the previous block of code [ {} ], if there is one.">
                 <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt OPEN_BRACKET"/>
             </action>
-            <action id="GoToInnerBlock" class="me.dirtydan16.betterjump.actions.navigation.GoToInnerBlock"
+            <action id="GoToInnerBlock" class="me.dirtydan16.betterjump.actions.navigation.inside_a_file.GoToInnerBlock"
                     text="Go to Inner Block"
                     description="Moves caret to the start of the content of an inner code block if possible [ {} ]">
                 <keyboard-shortcut keymap="$default" first-keystroke="shift alt CLOSE_BRACKET"/>
             </action>
-            <action id="GoToOuterBlock" class="me.dirtydan16.betterjump.actions.navigation.GoToOuterBlock"
+            <action id="GoToOuterBlock" class="me.dirtydan16.betterjump.actions.navigation.inside_a_file.GoToOuterBlock"
                     text="Go to Outer Block"
                     description="Moves caret to the start of the content of an outer code block if possible [ {} ]">
                 <keyboard-shortcut keymap="$default" first-keystroke="shift alt OPEN_BRACKET"/>
             </action>
-            <action id="SelectBlockCaretIsIn" class="me.dirtydan16.betterjump.actions.navigation.SelectBlockCaretIsIn"
+            <action id="SelectBlockCaretIsIn" class="me.dirtydan16.betterjump.actions.navigation.inside_a_file.SelectBlockCaretIsIn"
                     text="Select Code Block"
                     description="Select the block of code the caret is in. This refers to what is inside curly braces, and curly braces only.">
                 <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt W"/>
