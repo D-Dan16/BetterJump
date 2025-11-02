@@ -50,6 +50,12 @@ tasks {
   withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "21"
   }
+
+  publishPlugin {
+    token.set(System.getenv("PUBLISH_TOKEN"))
+    channels.set(listOf("default"))
+  }
+
 }
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.compilerOptions {
