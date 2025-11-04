@@ -5,9 +5,49 @@
 
     <vendor email="stav.gr8@gmail.com">Stav Gordeev</vendor>
 
-    <description>
-        An Intellij Plugin for better navigation in files
-    </description>
+    <description><![CDATA[
+      <p><strong>BetterJump</strong><br/>
+      An IntelliJ IDEA plugin for better in-file navigation.</p>
+
+      <h2><a href="https://github.com/D-Dan16/BetterJump">Repo Link</a></h2>
+
+      <p><strong>Overview</strong><br/>
+      BetterJump introduces precise, customizable navigation shortcuts that make moving inside code files much faster.
+      You can jump between blocks, words, or commas, and even select sections intelligently — without ever touching the mouse.</p>
+
+      <p><strong>Default Keyboard Shortcuts</strong></p>
+
+      <p><strong>Block Navigation</strong></p>
+      <ul>
+        <li><strong>Go to Next Block</strong> — Moves caret to the first non-whitespace character of the next {} block. <code>Shift + Ctrl + Alt + ]</code></li>
+        <li><strong>Go to Previous Block</strong> — Moves caret to the first non-whitespace character of the previous {} block. <code>Shift + Ctrl + Alt + [</code></li>
+        <li><strong>Go to Inner Block</strong> — Start of inner block content. <code>Shift + Alt + ]</code></li>
+        <li><strong>Go to Outer Block</strong> — Start of outer block content. <code>Shift + Alt + [</code></li>
+        <li><strong>Select Code Block</strong> — Selects code inside current {} block. <code>Shift + Ctrl + Alt + W</code></li>
+      </ul>
+
+      <p><strong>Comma Navigation</strong></p>
+      <ul>
+        <li><strong>Go To Next Comma</strong> — Moves caret to the next comma. <code>Ctrl + ,</code></li>
+        <li><strong>Go To Previous Comma</strong> — Moves caret to the previous comma. <code>Ctrl + Shift + ,</code></li>
+        <li><strong>Select Content To Next Comma</strong> — Selects text between commas to the right. <code>Ctrl + Alt + ,</code></li>
+        <li><strong>Select Content To Previous Comma</strong> — Selects text between commas to the left. <code>Ctrl + Alt + Shift + ,</code></li>
+      </ul>
+
+      <p><strong>Horizontal / Word Navigation</strong></p>
+      <ul>
+        <li><strong>Jump Horizontally</strong> — Jumps caret by a preset number of characters. <code>Shift + Ctrl + Alt + X</code></li>
+        <li><strong>Set Horizontal Jump Amount</strong> — Opens dialog to set jump size. <code>Shift + Ctrl + G</code> or <code>Shift + Ctrl + X</code></li>
+        <li><strong>Invert Jump Horizontal Direction</strong> — Inverts left ↔ right. <code>Shift + Alt + X</code></li>
+        <li><strong>Jump To Right (Word)</strong> — Jumps to next word start. <code>Ctrl + Shift + Alt + →</code></li>
+        <li><strong>Jump To Left (Word)</strong> — Jumps to previous word start. <code>Ctrl + Shift + Alt + ←</code></li>
+      </ul>
+
+      <p><strong>Author</strong><br/>
+      <strong>Stav Gordeev</strong><br/>
+      Email: <a href="mailto:stav.gr8@gmail.com">stav.gr8@gmail.com</a></p>
+
+    ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
 
@@ -125,6 +165,10 @@
                 <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt W"/>
             </action>
         </group>
+<!--        <action id="NextNodeJumpDown" class="me.dirtydan16.betterjump.actions.navigation.between_files.NextNodeJumpDown" text="Next Node Jump Down"-->
+<!--                description="Jump vertically down by an X amount in the Tree structures, such as the Project Window">-->
+<!--            <keyboard-shortcut keymap="$default" first-keystroke="ctrl DOWN"/>-->
+<!--        </action>-->
     </actions>
 
 </idea-plugin>
