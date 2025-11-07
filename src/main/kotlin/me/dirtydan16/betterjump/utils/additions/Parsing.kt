@@ -42,23 +42,49 @@ private fun findIndicesOfSurroundingBlock(
     openerChar: Char,
     closerChar: Char,
 ): Pair<Int?, Int?> {
-    val stack = ArrayDeque<Int>()   // stores indices of the opener character
+    if (text.isEmpty())
+        return null to null
+
+    val stack: ArrayDeque<Int> = ArrayDeque()   // stores indices of the opener character
     val pairs: MutableList<Pair<Int, Int>> = mutableListOf()  // stores matched pairs
 
     // Step 1: match all openers, with closers
 
     val insideStringChars = listOf('"', '\'')
-    var shouldIgnoreChar = text[0] in insideStringChars
-    text.forEachIndexed { index, ch ->
-        if (shouldIgnoreChar) {
-            if (ch in insideStringChars)
-                shouldIgnoreChar = false
-        } else {
-            when (ch) {
-                in insideStringChars -> shouldIgnoreChar = true
-                openerChar -> stack.addLast(index)
-                closerChar -> if (stack.isNotEmpty()) {
-                    pairs += stack.removeLast() to index
+    var parsingState = ParsingStates.REGULAR
+
+    for ((index, ch) in text.withIndex()) {
+        when (parsingState){
+            ParsingStates.IN_TEXT -> {
+                if (ch in insideStringChars)
+                    parsingState = ParsingStates.REGULAR
+            }
+            ParsingStates.REGULAR -> {
+                when (ch) {
+                    in insideStringChars -> {
+                        parsingState = ParsingStates.IN_TEXT
+                    }
+                    '/' -> {
+                        when (text[index+1]) {
+                            '/' -> parsingState = ParsingStates.IN_COMMENT
+                            '*' -> parsingState = ParsingStates.IN_MULTI_LINE_COMMENT
+                        }
+                    }
+                    openerChar -> stack.addLast(index)
+                    closerChar -> if (stack.isNotEmpty()) {
+                        pairs += stack.removeLast() to index
+                    }
+                }
+            }
+            ParsingStates.IN_COMMENT -> {
+                if (ch == '\n') {
+                    parsingState = ParsingStates.REGULAR
+                }
+            }
+
+            ParsingStates.IN_MULTI_LINE_COMMENT -> {
+                if (text[index] == '*' && text[index+1] == '/') {
+                    parsingState = ParsingStates.REGULAR
                 }
             }
         }
@@ -70,4 +96,8 @@ private fun findIndicesOfSurroundingBlock(
     }
 
     return match ?: (null to null)
+}
+
+enum class ParsingStates {
+    REGULAR,IN_TEXT,IN_COMMENT,IN_MULTI_LINE_COMMENT
 }

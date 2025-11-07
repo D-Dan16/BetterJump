@@ -17,9 +17,9 @@ class GoToNextBlock : AnAction() {
         for (caret in carets) {
             caret.removeSelection() //for predictability and consistency
 
-            // We want to skip the current Block we are in, so we don't stumble upon our braces. So we start the search *outside* of them if we are inside braces.
-            val startSearchIndex: Int = findIndicesOfCodeBlock(text,caret.offset).second ?: caret.offset
-            val endSearchIndex: Int = findIndicesOfCodeBlock(text,startSearchIndex).second ?: caret.offset
+            // We want to skip the current Block we are in, so we don't stumble upon our braces. So we start the search *outside* of them if we are inside braces and end them at the outer block because we don't want to just traverse to a different scope altogether.
+            val startSearchIndex = findIndicesOfCodeBlock(text,caret.offset).second ?: caret.offset
+            val endSearchIndex = findIndicesOfCodeBlock(text,startSearchIndex+1).second ?: text.lastIndex
 
             // If we are inside a block, we want to start searching for the next block after the end of the current block. If there is no end, stop and move to the next caret
             val openingBraceIndex = (startSearchIndex..endSearchIndex).firstOrNull {
@@ -50,9 +50,9 @@ class GoToPreviousBlock : AnAction() {
         for (caret in carets) {
             caret.removeSelection() //for predictability and consistency
 
-            // We want to skip the current Block we are in, so we don't stumble upon our braces. So we start the search *outside* of them if we are inside braces.
+            // We want to skip the current Block we are in, so we don't stumble upon our braces. So we start the search *outside* of them if we are inside braces and end them at the outer block because we don't want to just traverse to a different scope altogether.
             val startSearchIndex: Int = findIndicesOfCodeBlock(text, caret.offset).first ?: caret.offset
-            val endSearchIndex: Int = findIndicesOfCodeBlock(text,startSearchIndex).first ?: caret.offset
+            val endSearchIndex = findIndicesOfCodeBlock(text,startSearchIndex).first ?: 0
 
             val closingBraceIndex = (startSearchIndex downTo endSearchIndex).firstOrNull {
                 text[it] == '}'
@@ -111,7 +111,7 @@ class GoToOuterBlock : AnAction() {
         for (caret in carets) {
             caret.removeSelection() //for predictability and consistency
 
-            val indexOfCharacterThatIsInOuterBlock: Int = findIndicesOfCodeBlock(text, caret.offset).second
+            val indexOfCharacterThatIsInOuterBlock: Int = findIndicesOfCodeBlock(text, caret.offset).second?.plus(1)
                 ?: continue
             val rangeOfIndicesOfOuterBlock: IntRange = findRangeOfCodeBlock(text, indexOfCharacterThatIsInOuterBlock)!!
 

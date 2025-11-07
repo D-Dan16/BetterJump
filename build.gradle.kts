@@ -1,9 +1,11 @@
+@file:Suppress("DEPRECATION")
+
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
   id("java")
   id("org.jetbrains.kotlin.jvm") version "2.1.0"
-  id("org.jetbrains.intellij.platform") version "2.9.0"
+  id("org.jetbrains.intellij.platform") version "2.10.4"
 }
 
 group = "me.dirtydan16"
@@ -36,7 +38,7 @@ intellijPlatform {
     }
 
     changeNotes = """
-      added plugin description
+      Fixed bugs making block traversal unreliable. Also fixed the Status Bar widget that shows the caret's offset not actually updated.
     """.trimIndent()
   }
 }
@@ -51,13 +53,10 @@ tasks {
     kotlinOptions.jvmTarget = "21"
   }
 
-  publishPlugin {
-    token.set(System.getenv("PUBLISH_TOKEN"))
-    channels.set(listOf("default"))
-  }
-
 }
+
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.compilerOptions {
-  freeCompilerArgs.set(listOf("-XXLanguage:+BreakContinueInInlineLambdas"))
+  freeCompilerArgs.set(listOf("-XXLanguage:+BreakContinueInInlineLambdas", "-XXLanguage:+WhenGuards"))
+  freeCompilerArgs.add("-Xwhen-guards")
 }
