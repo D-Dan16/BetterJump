@@ -137,6 +137,12 @@
                     description="Jump the caret to the start of the contents of the prev method call">
                 <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl M"/>
             </action>
+            <action id="me.dirtydan16.betterjump.actions.navigation.inside_a_file.TraverseThroughMethodCalls"
+                    class="me.dirtydan16.betterjump.actions.navigation.inside_a_file.TraverseThroughMethodCalls"
+                    text="Traverse Through Method Calls"
+                    description="Shows a menu of a list of usages of methods on a given file.">
+                <keyboard-shortcut keymap="$default" first-keystroke="shift alt M"/>
+            </action>
         </group>
         <group id="GoToBlock">
             <action id="GoToNextBlock" class="me.dirtydan16.betterjump.actions.navigation.inside_a_file.GoToNextBlock"
@@ -165,10 +171,10 @@
                 <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt W"/>
             </action>
         </group>
-<!--        <action id="NextNodeJumpDown" class="me.dirtydan16.betterjump.actions.navigation.between_files.NextNodeJumpDown" text="Next Node Jump Down"-->
-<!--                description="Jump vertically down by an X amount in the Tree structures, such as the Project Window">-->
-<!--            <keyboard-shortcut keymap="$default" first-keystroke="ctrl DOWN"/>-->
-<!--        </action>-->
+        <!--        <action id="NextNodeJumpDown" class="me.dirtydan16.betterjump.actions.navigation.between_files.NextNodeJumpDown" text="Next Node Jump Down"-->
+        <!--                description="Jump vertically down by an X amount in the Tree structures, such as the Project Window">-->
+        <!--            <keyboard-shortcut keymap="$default" first-keystroke="ctrl DOWN"/>-->
+        <!--        </action>-->
     </actions>
 
 </idea-plugin>

@@ -38,7 +38,13 @@ intellijPlatform {
     }
 
     changeNotes = """
-      Fixed bugs making block traversal unreliable. Also fixed the Status Bar widget that shows the caret's offset not actually updated.
+      Refactored caret offset widget to support dynamic updates and fixed block traversal action-related bugs. 
+      
+      Bug fixes include:
+      - comments are now ignored in traversal
+      - can traverse reliably through the outermost layer of code blocks (which are typically class declarations)
+      - fixed unique cases where when you go to the next block, you go to a block that is in a diff layer than the layer the current caret is at.
+      - Fixed cases where trying to go to an inner block wouldn't work
     """.trimIndent()
   }
 }
