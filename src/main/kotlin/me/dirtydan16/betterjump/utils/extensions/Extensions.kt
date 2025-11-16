@@ -22,3 +22,7 @@ fun @NlsSafe CharSequence.indexOfOrNull(targetChar: Char, startSearchIndex: Int)
 
     return index
 }
+
+fun <T> Pair<T?,T?>.isContentsNotNull() : Boolean {
+    return this.first != null && this.second != null
+}

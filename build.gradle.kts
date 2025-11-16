@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "me.dirtydan16"
-version = "1.0.1"
+version = "1.1.0"
 
 repositories {
   mavenCentral()
@@ -18,12 +18,15 @@ repositories {
   }
 }
 
+
+
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin.html
 dependencies {
   intellijPlatform {
     create("IC", "2025.1")
     testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
+    bundledPlugin("org.jetbrains.kotlin")
 
     // Add necessary plugin dependencies for compilation here, example:
     // bundledPlugin("com.intellij.java")
@@ -37,15 +40,7 @@ intellijPlatform {
       sinceBuild = "251"
     }
 
-    changeNotes = """
-      Refactored caret offset widget to support dynamic updates and fixed block traversal action-related bugs. 
-      
-      Bug fixes include:
-      - comments are now ignored in traversal
-      - can traverse reliably through the outermost layer of code blocks (which are typically class declarations)
-      - fixed unique cases where when you go to the next block, you go to a block that is in a diff layer than the layer the current caret is at.
-      - Fixed cases where trying to go to an inner block wouldn't work
-    """.trimIndent()
+    changeNotes = """""".trimIndent()
   }
 }
 

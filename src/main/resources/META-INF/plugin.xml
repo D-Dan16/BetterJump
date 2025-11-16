@@ -50,6 +50,13 @@
     ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.kotlin</depends>
+
+    <extensions defaultExtensionNs="org.jetbrains.kotlin">
+        <supportsKotlinPluginMode supportsK2="true"/>
+    </extensions>
+
+
 
     <extensions defaultExtensionNs="com.intellij">
         <statusBarWidgetFactory implementation="me.dirtydan16.betterjump.actions.navigation.inside_a_file.CaretOffsetWidgetFactory"
@@ -130,18 +137,18 @@
             <action id="JumpToNextMethodCall" class="me.dirtydan16.betterjump.actions.navigation.inside_a_file.JumpToNextMethodCall"
                     text="Jump to Next Method Call"
                     description="Jump the caret to the start of the contents of the next method call">
-                <keyboard-shortcut keymap="$default" first-keystroke="ctrl M"/>
+                <keyboard-shortcut keymap="$default" first-keystroke="ctrl QUOTE"/>
             </action>
             <action id="JumpToPrevMethodCall" class="me.dirtydan16.betterjump.actions.navigation.inside_a_file.JumpToPrevMethodCall"
                     text="Jump to Previous Method Call"
                     description="Jump the caret to the start of the contents of the prev method call">
-                <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl M"/>
+                <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl QUOTE"/>
             </action>
             <action id="me.dirtydan16.betterjump.actions.navigation.inside_a_file.TraverseThroughMethodCalls"
                     class="me.dirtydan16.betterjump.actions.navigation.inside_a_file.TraverseThroughMethodCalls"
                     text="Traverse Through Method Calls"
                     description="Shows a menu of a list of usages of methods on a given file.">
-                <keyboard-shortcut keymap="$default" first-keystroke="shift alt M"/>
+                <keyboard-shortcut keymap="$default" first-keystroke="shift alt QUOTE"/>
             </action>
         </group>
         <group id="GoToBlock">
