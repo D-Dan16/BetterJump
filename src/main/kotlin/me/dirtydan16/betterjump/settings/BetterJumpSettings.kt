@@ -9,13 +9,13 @@ import com.intellij.openapi.components.service
 data class State(
     var wordsToJumpHorizontally: Int = 3,
     var numOfCharactersToJumpToHorizontally: Int = 20,
-    var isJumpHorizontallyFlipped: Boolean = false
+    var isJumpHorizontallyFlipped: Boolean = false,
+    var menuJumpAmountVertically: Int = 3
 )
 
 @Service(Service.Level.APP)
 @State(name = "BetterJumpSettings", storages = [Storage("betterJump.xml")])
 class BetterJumpSettings : PersistentStateComponent<me.dirtydan16.betterjump.settings.State> {
-
     private var state = State()
 
     var wordsToJumpHorizontally: Int
@@ -35,6 +35,13 @@ class BetterJumpSettings : PersistentStateComponent<me.dirtydan16.betterjump.set
         set(value) {
             state.isJumpHorizontallyFlipped = value
         }
+
+    var menuJumpAmountVertically: Int
+        get() = state.menuJumpAmountVertically
+        set(value) {
+            state.menuJumpAmountVertically = value
+        }
+
 
 
     override fun getState(): me.dirtydan16.betterjump.settings.State = state

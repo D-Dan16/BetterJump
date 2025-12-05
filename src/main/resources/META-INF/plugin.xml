@@ -165,10 +165,16 @@
                 <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt W"/>
             </action>
         </group>
-<!--        <action id="NextNodeJumpDown" class="me.dirtydan16.betterjump.actions.navigation.between_files.NextNodeJumpDown" text="Next Node Jump Down"-->
-<!--                description="Jump vertically down by an X amount in the Tree structures, such as the Project Window">-->
-<!--            <keyboard-shortcut keymap="$default" first-keystroke="ctrl DOWN"/>-->
-<!--        </action>-->
+        <group id="MenuNav">
+            <action id="NextNodeJumpDown" class="me.dirtydan16.betterjump.actions.navigation.between_files.NextNodeJumpDown" text="Next Node Jump Down"
+                    description="Jump vertically down by an X amount in the Tree structures, such as the Project Window">
+                <keyboard-shortcut keymap="$default" first-keystroke="ctrl DOWN"/>
+            </action>
+            <action id="NextNodeJumpUp" class="me.dirtydan16.betterjump.actions.navigation.between_files.NextNodeJumpUp" text="Next Node Jump Up"
+                    description="Jump vertically up by an X amount in the Tree structures, such as the Project Window">
+                <keyboard-shortcut keymap="$default" first-keystroke="ctrl UP"/>
+            </action>
+        </group>
     </actions>
 
 </idea-plugin>
