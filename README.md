@@ -33,6 +33,17 @@ You can jump between blocks, words, or commas, and even select sections intellig
 | Jump To Right (Word) | Jumps caret to the next word start (configurable X distance). | Ctrl + Shift + Alt + → |
 | Jump To Left (Word) | Jumps caret to the previous word start (configurable X distance). | Ctrl + Shift + Alt + ← |
 
+
+## Tree Navigation
+
+Quick vertical navigation for tree-based UI components such as the **Project Window** and **Structure View**.
+
+| Action | Description | Default Shortcut |
+|--------|-------------|------------------|
+| Next Node Jump Down | Jumps the selection down by a fixed amount in a tree structure. | Ctrl + ↓ |
+| Next Node Jump Up | Jumps the selection up by a fixed amount in a tree structure. | Ctrl + ↑ |
+
+
 ## Author
 **Stav Gordeev**  
 Email: stav.gr8@gmail.com
